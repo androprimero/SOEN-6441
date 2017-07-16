@@ -1,33 +1,33 @@
 #!/usr/bin/python3
-class Operation:
-    'Class with some basic operation functions'
-    result = 0
-    DictFactorial ={ 0: 1,1:1}
-    def __init__(self):
-        result = 0
+'Module with common operations'
+result = 0
+DictFactorial ={ 0: 1,1:1}
 
-    def power(base, exponent):
-        if exponent == 0:
+def power(base, exponent):
+      if exponent == 0:
             return 1
-        else:
-            aux = Operation.power(float(base), int(exponent/2))
-            if Operation.module_number(float(exponent), 2) == 0:
-                return  aux * aux 
+      else:
+            aux = power(float(base), int(exponent/2))
+            if exponent % 2 == 0:
+                  return  aux * aux 
             else:
-                return base * aux * aux
-    power = staticmethod(power)
+                  return base * aux * aux
 
-    def module_number(dividend, divisor):
-        auxiliar = float(dividend) / float(divisor)
-        auxiliar2 = int(auxiliar)
-        auxiliar = auxiliar - auxiliar2
-        result = int(auxiliar * divisor)
-        return result
-    module_number = staticmethod(module_number)
-    def Factorial(number):
-        if(Operation.DictFactorial.has_key(number)):
-            return Operation.DictFactorial.get(number)
-        else:
-            Operation.DictFactorial[number] = number * Operation.Factorial(number-1)
-            return Operation.DictFactorial[number]
-    Factorial = staticmethod(Factorial)
+def Factorial(number):
+      if(DictFactorial.has_key(number)):
+            return DictFactorial.get(number)
+      else:
+            DictFactorial[number] = number * Factorial(number-1)
+            return DictFactorial[number]
+      
+def AbsoluteValue(number):
+      if(number > 0):
+            return number
+      else:
+            return (-1* number)
+
+def sign(number1,number2):
+      if((number1 < 0 and number2 < 0) or (number1>0 and number2>0)):
+            return True
+      else:
+            return False
