@@ -4,8 +4,11 @@ Filename: FileManager.py
 Author: Alejandro Bernal
 version: 1.0
 Description:
-Module that has FileManager class, which create, open write and read a text plain file.
+Module that has FileManager class, which create,
+open write and read a text plain file.
 """
+
+
 class FileManager:
     file_name = ""
 

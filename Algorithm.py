@@ -10,6 +10,8 @@ Description:
 Module that has the algorithms used to approximate roots of functions.
 Include: Bisection method, Regula-Falsi method and Newton Method.
 """
+
+
 class Constants:
     """Holds the mathematical constants"""
     pi = Decimal(0.0)
@@ -50,7 +52,8 @@ def calculate_pi(square_root_two):
     inverse = Decimal(0.0)
     for i in range(3):
         auxiliary = Decimal(Operations.factorial(4 * i) * (1103 + 26390 * i))
-        auxiliary = auxiliary / (Decimal(Operations.power(Operations.factorial(i), 4) * Operations.power(396, 4 * i)))
+        auxiliary = auxiliary / (Decimal(Operations.power(
+            Operations.factorial(i), 4) * Operations.power(396, 4 * i)))
         inverse = inverse + auxiliary
     inverse = inverse * Decimal(((2 * square_root_two) / 9801))
     pi = Decimal(1 / inverse)
@@ -148,10 +151,11 @@ def newton_method(function, function_derivative, xi, error):
             return Decimal(x1)
         last_error = Decimal(previous_error)
         previous_error = Decimal(Operations.absolute_value(x1 - x0))
-        x0 = Decimal(x1)        
-    # if the error increases the last calulation was not good, so the function sends the previus one
+        x0 = Decimal(x1)
+    # if the error increases the last calulation was not good,
+    # so the function sends the previus one
     if previous_error > local_error:
-        x1 = Decimal(x0) 
+        x1 = Decimal(x0)
     return x1
 
 

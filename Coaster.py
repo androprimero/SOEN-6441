@@ -2,15 +2,18 @@
 from Algorithm import Constants
 import Algorithm
 import Operations
-from decimal import * 
+from decimal import *
 """
 Filename: Coasters.py
 Author: Alejandro Bernal
 version: 1.0
 Description:
-Module that contains coaster class, which holds the radius of the coasters and compute the length. To compute
-the length it uses Algorithm.py, Constant class and Operation.py.
+Module that contains coaster class,
+which holds the radius of the coasters and compute the length.
+To compute the length it uses Algorithm.py,
+Constant class and Operation.py.
 """
+
 
 class Coasters:
     constants = Constants
@@ -26,10 +29,12 @@ class Coasters:
         self.length = Decimal(0.0)
 
     def __str__(self):
-        string = "Radius = " + str(self.radius) + "\n Length = " + str(self.length)
-        string = string + " \n Pi = " + str(self.constants.get_pi()) + "\n alpha = " + str(self.alpha) +".\n"
+        string = "Radius = " + str(self.radius)
+        string = string + "\n Length = " + str(self.length)
+        string = string + " \n Pi = " + str(self.constants.get_pi())
+        string = string + "\n alpha = " + str(self.alpha) + ".\n"
         return string
-    
+
     def set_radius(self, radius):
         """
         Set the Radius of each coaster
@@ -56,11 +61,11 @@ class Coasters:
         """
         x = Decimal(number)
         return Decimal(x - Operations.sin(x) - ((self.constants.get_pi())/2))
-    
+
     def derivate_function_alpha(self, number):
         """
         Function that is the derivative of alpha function.
-        :param number: Decimal of the number that will compute the function        
+        :param number: Decimal of the number that will compute the function
         :return: 1 + cosine(number)
         """
         x = Decimal(number)
@@ -71,7 +76,9 @@ class Coasters:
         Function that compute the length between the coasters centers.
         :return: Decimal of the length
         """
-        self.length = 2 * self.get_radius()*(1 - Operations.cos(self.alpha / 2))
+        length = 2 * self.get_radius()
+        length = length * (1 - Operations.cos(self.alpha / 2))
+        self.length = length
         return self.length
 
     def get_length(self):
@@ -83,7 +90,8 @@ class Coasters:
 
     def calculate_alpha(self):
         """
-        Compute the value of alpha using the algorithms Bisection and Newton methods
+        Compute the value of alpha using the algorithms
+        Bisection and Newton methods
         :return: approximation of alpha
         """
         x1 = Decimal(2.0)
@@ -96,5 +104,7 @@ class Coasters:
                 x1 = interval[0]
             else:
                 x1 = interval[1]
-        self.alpha = Algorithm.newton_method(self.function_alpha, self.derivate_function_alpha, x1, error)
+        self.alpha = Algorithm.newton_method(self.function_alpha,
+                                             self.derivate_function_alpha, x1,
+                                             error)
         return self.alpha

@@ -13,6 +13,7 @@ Description:
 Module that has UserMainInterface class, to create the user interface.
 """
 
+
 class UserMainInterface(tkinter.Tk):
 
     def __init__(self, master=None):
@@ -26,14 +27,19 @@ class UserMainInterface(tkinter.Tk):
         self.data = tkinter.Frame(self)
         self.draws = tkinter.Frame(self)
         self.buttons = tkinter.Frame(self)
-        self.draw = tkinter.Canvas(self.draws, cursor="plus", height="450", width="670", bg="white")
+        self.draw = tkinter.Canvas(self.draws, cursor="plus",
+                                   height="450", width="670", bg="white")
         self.description = tkinter.Label(self.data, text="Radius")
         self.length = tkinter.Label(self.data, text="length =")
         self.length_value = StringVar()
-        self.result = tkinter.Label(self.data, textvariable=self.length_value)
-        self.action = tkinter.Button(self.buttons, text="Compute", command=self.compute_action)
-        self.save = tkinter.Button(self.buttons, text="Save", command=self.save_file)
-        self.quit = tkinter.Button(self.buttons, text="Quit", command=self.destroy)
+        self.result = tkinter.Label(self.data,
+                                    textvariable=self.length_value)
+        self.action = tkinter.Button(self.buttons, text="Compute",
+                                     command=self.compute_action)
+        self.save = tkinter.Button(self.buttons, text="Save",
+                                   command=self.save_file)
+        self.quit = tkinter.Button(self.buttons, text="Quit",
+                                   command=self.destroy)
         self.field = tkinter.Entry(self.data)
         self.add_components()
 
@@ -71,9 +77,11 @@ class UserMainInterface(tkinter.Tk):
             self.draw.delete("all")
             radius = float(self.field.get())
             if not self.coasters.set_radius(radius):
-                messagebox.askretrycancel("Invalid Radius", 'Please Write a valid Radius greater than 0.0')
+                messagebox.askretrycancel("Invalid Radius",
+                                          'Please Write a valid Radius'
+                                          ' greater than 0.0')
             else:
-                self.length_value.set( str( self.coasters.calculate_length() ) )
+                self.length_value.set(str(self.coasters.calculate_length()))
                 self.draw_circles()
         except ValueError:
             messagebox.askretrycancel("Invalid Radius", 'Please type a number')
@@ -84,8 +92,10 @@ class UserMainInterface(tkinter.Tk):
         :return:
         """
         try:
-            file_types = [('Text files', '*.txt'),('All Files', '*')]
-            file_info = asksaveasfilename(title="Save file", defaultextension=".txt",filetypes=file_types)
+            file_types = [('Text files', '*.txt'), ('All Files', '*')]
+            file_info = asksaveasfilename(title="Save file",
+                                          defaultextension=".txt",
+                                          filetypes=file_types)
             self.file = FileManager(file_info)
             if self.coasters.get_radius() != 0.0:
                 self.file.save(self.coasters.__str__())
@@ -93,10 +103,13 @@ class UserMainInterface(tkinter.Tk):
                 self.compute_action()
             self.file.close()
         except FileNotFoundError:
-            messagebox.showinfo("Invalid file name","Please write a valid name")
+            messagebox.showinfo("Invalid file name",
+                                "Please write a valid name")
 
     def create_circle(self, x, y, radius, **option_arguments):
-        return self.draw.create_oval(x - radius, y - radius, x + radius, y + radius, **option_arguments)
+        return self.draw.create_oval(x - radius, y - radius,
+                                     x + radius, y + radius,
+                                     **option_arguments)
 
     def draw_circles(self):
         xi = self.validate_radius()
@@ -111,8 +124,11 @@ class UserMainInterface(tkinter.Tk):
 
     def validate_radius(self):
         """
-        Function that change the radius to draw, warning it does not change the radius to compute the length
-        :return: the radius that can be drawn in the canvas of the interface.
+        Function that change the radius to draw,
+        warning it does not change the radius
+        to compute the length
+        :return: the radius that can be drawn
+                 in the canvas of the interface.
         """
         x = self.coasters.get_radius()
         while (x < 100) or (x > 200):

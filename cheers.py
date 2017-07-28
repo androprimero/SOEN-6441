@@ -8,6 +8,7 @@ Description:
 Module that has the main method. It starts the user interface.
 """
 
+
 def main():
     user_interface = UserMainInterface()
     user_interface.start()
